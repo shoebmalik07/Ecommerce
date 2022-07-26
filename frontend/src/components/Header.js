@@ -1,3 +1,4 @@
+import {Link as RouterLink} from 'react-router-dom'
 import { Flex, Heading, Box, Icon, Link } from "@chakra-ui/react";
 import { useState } from "react";
 import { HiShoppingBag, HiUser, HiOutlineMenuAlt3 } from 'react-icons/hi';
@@ -42,7 +43,8 @@ const Header = () => {
                 mt={{ base: '3', md: '0' }}
             >
                 <Link
-                    href="/cart"
+                    as={RouterLink}
+                    to="/cart"
                     color='whiteAlpha.600'
                     fontSize='sm'
                     letterSpacing='wide'
@@ -57,7 +59,8 @@ const Header = () => {
                     Cart
                 </Link>
                 <Link
-                    href="/cart"
+                    as={RouterLink}
+                    to="/login"
                     color='whiteAlpha.600'
                     fontSize='sm'
                     letterSpacing='wide'
