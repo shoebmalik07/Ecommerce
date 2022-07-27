@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen';
 import { Flex } from '@chakra-ui/react';
+import ProductScreen from './screens/ProductScreen';
 
 
 const App = () => {
@@ -19,9 +20,10 @@ const App = () => {
           bgColor='gray.200'
 
         >
-          {/* <HomeScreen /> */}
+
           <Routes>
             <Route path='/' element={<HomeScreen />} />
+            <Route path='/product/:id' element={<ProductScreen />} />
           </Routes>
         </Flex>
         <Footer />

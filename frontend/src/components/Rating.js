@@ -4,6 +4,7 @@ import { IoStar, IoStarOutline, IoStarHalf } from 'react-icons/io5'
 const Rating = ({ value, text,color = 'red.500' }) => {
     return (
         <Flex alignItems='center'>
+        <Box mr='3'>
             <Icon
                 color={color}
                 as={value >= 1 ? IoStar : value >= 0.5 ? IoStarHalf : IoStarOutline}
@@ -24,6 +25,8 @@ const Rating = ({ value, text,color = 'red.500' }) => {
                 color={color}
                 as={value >= 5 ? IoStar : value >= 4.5 ? IoStarHalf : IoStarOutline}
             />
+            </Box>
+            <Text>{text}</Text>
         </Flex>
     )
 }
