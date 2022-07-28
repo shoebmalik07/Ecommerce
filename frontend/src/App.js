@@ -8,12 +8,12 @@ import ProductScreen from './screens/ProductScreen';
 
 const App = () => {
   return (
-    <div>
+    
       <BrowserRouter>
         <Header />
         <Flex
           as='main'
-          dir='column'
+          direction='column'
           mt='72px'
           py='6'
           px='6'
@@ -28,7 +28,7 @@ const App = () => {
         </Flex>
         <Footer />
       </BrowserRouter>
-    </div>
+  
   )
 }
 
