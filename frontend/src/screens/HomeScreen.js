@@ -2,6 +2,7 @@ import { Heading, Grid, Flex } from "@chakra-ui/react";
 import Product from "../components/Product";
 import products from "../products";
 
+
 const HomeScreen = () => {
     return (
         <div>

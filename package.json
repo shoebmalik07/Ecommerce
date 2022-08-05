@@ -1,0 +1,22 @@
+{
+  "name": "reactecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shoebmalik07/Ecommerce.git"
+  },
+  "author": "malik shoeb",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/shoebmalik07/Ecommerce/issues"
+  },
+  "homepage": "https://github.com/shoebmalik07/Ecommerce#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
