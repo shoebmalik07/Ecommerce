@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productAction'
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 
 
@@ -28,9 +30,9 @@ const HomeScreen = () => {
             </Heading>
             {
                 loading ? (
-                    <p>loading...</p>
+                    <Loader/>
                 ) : error ? (
-                    <p>{error}</p>
+                    <Message type = 'error'>{error}</Message>
                 ) : (
 
                     <Grid templateColumns={{

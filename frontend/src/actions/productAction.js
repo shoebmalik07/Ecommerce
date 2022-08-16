@@ -10,9 +10,10 @@ export const listProducts = () => async (dispatch) => {
 
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
     } catch (err) {
+        
         dispatch({
             type: PRODUCT_LIST_FAIL,
-            error: err.reponse && err.reponse.data.message ? err.reponse.data.message : err.message
+            payload: err.reponse && err.reponse.data.message ? err.reponse.data.message : err.message
         })
     }
 }
