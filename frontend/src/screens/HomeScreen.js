@@ -1,38 +1,52 @@
 import { Heading, Grid, Flex } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import Product from "../components/Product";
-// import products from "../products";
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { listProducts } from '../actions/productAction'
+
+
+
 
 
 const HomeScreen = () => {
-    const [products,setProducts] = useState([])
+    const dispatch = useDispatch()
+    const productList = useSelector((state) => state.productList)
+    const { loading, error, products } = productList
 
-    useEffect(()=>{
-        const fetchProducts = async ()=>{
-            const {data} = await axios.get('/api/products')
-            // console.log(data)
-            setProducts(data)
-        }
-        fetchProducts()
-    },[])
+    useEffect(() => {
+        dispatch(listProducts())
 
-    
- 
+    }, [dispatch])
+
+
+
     return (
         <div>
 
             <Heading as='h2' mb='8' fontSize='3xl'>
                 Latest Products
             </Heading>
-            <Grid templateColumns='1fr 1fr 1fr 1fr' gap='8' >
-                {
-                    products.map((prod) => (
-                        <Product key={prod._id} product={prod} />
-                    ))
-                }
-            </Grid>
-            
+            {
+                loading ? (
+                    <p>loading...</p>
+                ) : error ? (
+                    <p>{error}</p>
+                ) : (
+
+                    <Grid templateColumns={{
+                        sm: '1fr',
+                        md: '1fr 1fr',
+                        lg: '1fr 1fr 1fr',
+                        xl: '1fr 1fr 1fr 1fr',
+                    }} gap='8' >
+                        {
+                            products.map((prod) => (
+                                <Product key={prod._id} product={prod} />
+                            ))
+                        }
+                    </Grid>
+                )}
+
         </div>
     )
 }
