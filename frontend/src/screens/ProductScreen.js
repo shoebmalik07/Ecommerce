@@ -1,6 +1,6 @@
-import { Link as RouterLink, useParams } from "react-router-dom";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Flex, Grid, Image, Heading, Text, Button } from "@chakra-ui/react";
+import { Flex, Grid, Image, Heading, Text, Button, Select } from "@chakra-ui/react";
 import Rating from "../components/Rating";
 // import products from "../products";
 import axios from 'axios'
@@ -12,7 +12,21 @@ const ProductScreen = () => {
 
 
     const { id } = useParams()
+    const navigate = useNavigate()
 
+    const [qty,setQty] = useState(1)
+
+<<<<<<< Updated upstream
+=======
+
+    const productDetails = useSelector((state)=>state.productDetails)
+    const {loading, error, product} = productDetails
+
+    const addToCartHandler =()=>{
+        navigate(`/cart/${id}?qty=${qty}`)
+    }
+
+>>>>>>> Stashed changes
     useEffect(()=>{
         const fetchProduct = async ()=>{
             const {data} = await axios.get(`/api/products/${id}`)
@@ -21,7 +35,11 @@ const ProductScreen = () => {
         fetchProduct()
     },[id])
 
+<<<<<<< Updated upstream
     // const product = products.find((prod) => prod._id === id)
+=======
+
+>>>>>>> Stashed changes
     return (
         <>
             <Flex mb='5'>
@@ -73,6 +91,26 @@ const ProductScreen = () => {
                         <Text>Status:</Text>
                         <Text fontWeight='bold'>{product.countInStock > 0 ? 'In Stock' : 'Not Available'}</Text>
                     </Flex>
+                    {
+                        product.countInStock>0 && (
+                            <Flex justifyContent='space-between'py ='2'>
+                            <Text>Qty: </Text>
+                            <Select
+                            value = {qty}
+                            onChange = {(e)=>setQty(e.target.value)}
+                            width = '30%'
+                            >
+                            {[...Array(product.countInStock).keys()].map((i)=>(
+                                <option key = {i+1} value = {i+1}>
+                                    {i+1}
+                                </option>
+                            ))}
+
+                            </Select>
+
+                            </Flex>
+                        )
+                    }
                     <Button
                         bgColor='gray.800'
                         textTransform='uppercase'
@@ -80,6 +118,7 @@ const ProductScreen = () => {
                         colorScheme='teal'
                         my='2'
                         disabled={product.countInStock === 0}
+                        onClick = {addToCartHandler}
                     >
                         Add To Cart
                     </Button>
