@@ -2,22 +2,21 @@ import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Flex, Grid, Image, Heading, Text, Button, Select } from "@chakra-ui/react";
 import Rating from "../components/Rating";
-// import products from "../products";
-import axios from 'axios'
+import {useDispatch, useSelector} from 'react-redux'
+import { listProductDetails } from "../actions/productAction";
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+
 
 import React from 'react'
 
 const ProductScreen = () => {
-    const [product, setProduct] = useState({})
-
-
+    const dispatch = useDispatch()
     const { id } = useParams()
     const navigate = useNavigate()
 
     const [qty,setQty] = useState(1)
 
-<<<<<<< Updated upstream
-=======
 
     const productDetails = useSelector((state)=>state.productDetails)
     const {loading, error, product} = productDetails
@@ -26,20 +25,11 @@ const ProductScreen = () => {
         navigate(`/cart/${id}?qty=${qty}`)
     }
 
->>>>>>> Stashed changes
     useEffect(()=>{
-        const fetchProduct = async ()=>{
-            const {data} = await axios.get(`/api/products/${id}`)
-            setProduct(data)
-        }
-        fetchProduct()
-    },[id])
+       dispatch(listProductDetails(id))
+    },[id, dispatch])
 
-<<<<<<< Updated upstream
-    // const product = products.find((prod) => prod._id === id)
-=======
 
->>>>>>> Stashed changes
     return (
         <>
             <Flex mb='5'>
@@ -48,7 +38,13 @@ const ProductScreen = () => {
                     Go Back </Button>
             </Flex>
             
-
+            {
+                loading?(
+                    <Loader/>
+                ): error?(
+                    <Message type ='error'>{error}</Message>
+                ):(
+            
 
 
             <Grid templateColumns={{ base: '1fr', md: '1fr 1fr', lg: '5fr 4fr 3fr' }} gap='10'>
@@ -125,6 +121,7 @@ const ProductScreen = () => {
 
                 </Flex>
             </Grid>
+                )}
         </>
     )
 }
