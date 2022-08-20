@@ -1,13 +1,12 @@
-import {Alert , AlertIcon, AlertTitle} from '@chakra-ui/react'
+import { Alert, AlertIcon, AlertTitle } from '@chakra-ui/react'
 
-
-const Message = ({type =  'info', children })=>{
-    return(
+const Message = ({ type = 'info', children }) => {
+    return (
         <Alert status={type}>
-            <AlertIcon/>
+            <AlertIcon />
             <AlertTitle>{children}</AlertTitle>
-            
+
         </Alert>
     )
 }
-export default Message;
+export default Message; 
