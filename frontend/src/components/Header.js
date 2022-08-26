@@ -1,11 +1,26 @@
-import {Link as RouterLink} from 'react-router-dom'
-import { Flex, Heading, Box, Icon, Link } from "@chakra-ui/react";
+import {Link as RouterLink, useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+import { Flex, Heading, Box, Icon, Link,Button,Menu,MenuButton,MenuItem,MenuList } from "@chakra-ui/react";
 import { useState } from "react";
 import { HiShoppingBag, HiUser, HiOutlineMenuAlt3 } from 'react-icons/hi';
+import {IoChevronDown} from 'react-icons/io5'
+import {logout} from '../actions/userAction'
 
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const [show, setShow] = useState(false)
+
+    const userLogin = useSelector((state)=>state.userLogin)
+    const {userInfo} = userLogin
+
+    const logoutHandler = ()=>{
+        dispatch(logout())
+        navigate('/')
+    }
+
     return (
         <Flex
             as='header'
@@ -27,7 +42,7 @@ const Header = () => {
                 letterSpacing='md'
                 color='whiteAlpha.800'
             >
-                <Link href="/" _hover={{ color: 'gray.500', textDecor: 'none' }}>
+                <Link as={RouterLink} to = '/' _hover={{ color: 'gray.500', textDecor: 'none' }}>
                     RST STORE
                 </Link>
             </Heading>
@@ -58,7 +73,24 @@ const Header = () => {
                     <Icon as={HiShoppingBag} w='4' h='4' mr='1' />
                     Cart
                 </Link>
-                <Link
+                {
+                    userInfo?(
+                        <Menu>
+						<MenuButton
+							as={Button}
+							rightIcon={<IoChevronDown />}
+							_hover={{ textDecor: 'none', opacity: '0.7' }}>
+							{userInfo.name}
+						</MenuButton>
+						<MenuList>
+							<MenuItem as={RouterLink} to='/profile'>
+								Profile
+							</MenuItem>
+							<MenuItem onClick={logoutHandler}>Logout</MenuItem>
+						</MenuList>
+					</Menu>
+                    ):(
+                        <Link
                     as={RouterLink}
                     to="/login"
                     color='whiteAlpha.600'
@@ -74,6 +106,9 @@ const Header = () => {
                     <Icon as={HiUser} w='4' h='4' mr='1' />
                     Login
                 </Link>
+                    )
+                }
+                
             </Box>
         </Flex>
     )
