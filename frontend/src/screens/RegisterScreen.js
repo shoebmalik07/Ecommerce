@@ -52,7 +52,7 @@ const RegisterScreen = () => {
 
       <form onSubmit={SubmitHandler}>
       <FormControl id ='name'>
-      <FormLabel htmlFor='name'>Your Name</FormLabel>
+      <FormLabel htmlFor='name'> Name</FormLabel>
       <Input
         id='name'
         type='text'
@@ -65,7 +65,7 @@ const RegisterScreen = () => {
       <Spacer h='3'/>
 
       <FormControl id='email'>
-      <FormLabel htmlFor='email'>Your Email</FormLabel>
+      <FormLabel htmlFor='email'> Email</FormLabel>
       <Input
         id = 'email'
         type ='email'
