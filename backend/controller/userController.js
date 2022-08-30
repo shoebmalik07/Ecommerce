@@ -12,7 +12,7 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({
     email,
   });
-  // console.log(user);
+
 
   if (user && (await user.matchPassword(password))) {
     res.json({
@@ -83,7 +83,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //@access private
 
 const updateUserProfile = asyncHandler(async(req,res)=>{
-  const user = User.findById(req.user._id)
+  const user = await User.findById(req.user._id)
 
   if(user){
     user.name = req.body.name || user.name
@@ -92,7 +92,7 @@ const updateUserProfile = asyncHandler(async(req,res)=>{
       user.password = req.body.password
     }
 
-    const updatedUser = await user.save()
+    const updatedUser = await user.save();
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
