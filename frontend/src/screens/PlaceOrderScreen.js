@@ -17,9 +17,8 @@ import { createOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 
 const PlaceOrderScreen = () => {
-		const dispatch = useDispatch()
-		const navigate = useNavigate()
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
 
@@ -33,28 +32,26 @@ const PlaceOrderScreen = () => {
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { success, order, error } = orderCreate;
-  
 
-	const placeOrderHandler = () => {
-		dispatch(
-			createOrder({
-				orderItems: cart.cartItems,
-				shippingAddress: cart.shippingAddress,
-				paymentMethod: cart.paymentMethod,
-				itemsPrice: cart.itemsPrice,
-				taxPrice: cart.taxPrice,
-				totalPrice: cart.totalPrice,
-				shippingPrice: cart.shippingPrice,
-			})
-		);
-	};
+  const placeOrderHandler = () => {
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+        shippingPrice: cart.shippingPrice,
+      })
+    );
+  };
 
-	
-	useEffect(() => {
-		if (success) {
-			navigate(`/order/${order._id}`);
-		}
-	}, [success, navigate, order]);
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+  }, [success, navigate, order]);
 
   return (
     <Flex w="full" direction="column" py="5">
