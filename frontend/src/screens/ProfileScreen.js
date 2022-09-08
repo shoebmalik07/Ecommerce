@@ -10,13 +10,24 @@ import {
   Link,
   Spacer,
   Text,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  Icon,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
+import { IoWarning } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { getUserDetails, updateUserProfile } from "../actions/userAction";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
+import { listMyOrders } from "../actions/orderActions";
+import Loader from "../components/Loader";
+// import Icon from "@chakra";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -31,15 +42,16 @@ const ProfileScreen = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
   // console.log(user)
-  
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
+  const { success } = userUpdateProfile;
 
-  const userUpdateProfile = useSelector(state=>state.userUpdateProfile)
-  const {success} = userUpdateProfile
- 
+  const orderMyList = useSelector((state) => state.orderMyList);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderMyList;
+  console.log(orders);
 
   useEffect(() => {
     if (!userInfo) {
@@ -47,6 +59,7 @@ const ProfileScreen = () => {
     } else {
       if (!user.name) {
         dispatch(getUserDetails());
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -73,7 +86,7 @@ const ProfileScreen = () => {
 
           {error && <Message type="error">{error}</Message>}
           {message && <Message type="error">{message}</Message>}
-          {success && <Message type = 'success'>{'profile updated'}</Message>}
+          {success && <Message type="success">{"profile updated"}</Message>}
           <form onSubmit={submitHandler}>
             <FormControl id="name">
               <FormLabel htmlFor="name"> Name</FormLabel>
@@ -138,6 +151,64 @@ const ProfileScreen = () => {
             </Button>
           </form>
         </FormContainer>
+      </Flex>
+
+      {/* order */}
+      <Flex direction="column">
+        <Heading as="h2" mb="4">
+          My Orders
+        </Heading>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <Message type="error">{errorOrders}</Message>
+        ) : (
+          <Table variant="striped">
+            <Thead>
+              <Tr>
+                <Th>ID</Th>
+                <Th>DATE</Th>
+                <Th>TOTAL</Th>
+                <Th>PAID</Th>
+                <Th>DELIVERED</Th>
+                <Th></Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {orders.map((order) => (
+                <Tr key={order._id}>
+                  <Td>{order._id}</Td>
+                  <Td>{order.createdAt.substring(0, 10)}</Td>
+                  <Td>{order.totalPrice}</Td>
+                  <Td>
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <Icon as={IoWarning} color="red" />
+                    )}
+                  </Td>
+                  <Td>
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <Icon as={IoWarning} color="red" />
+                    )}
+                  </Td>
+                  <Td>
+                    <Button
+                      as={RouterLink}
+                      to={`/order/${order._id}`}
+                      colorScheme="teal"
+                      size="sm"
+                    >
+                      Details
+                    </Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        )}
       </Flex>
     </Grid>
   );

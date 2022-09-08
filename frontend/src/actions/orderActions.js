@@ -8,7 +8,10 @@ import {
   ORDER_PAY_FAIL,
   ORDER_PAY_SUCCESS,
   ORDER_PAY_REQUEST,
-  ORDER_PAY_RESET
+  ORDER_MY_LIST_FAIL,
+  ORDER_MY_LIST_REQUEST,
+  ORDER_MY_LIST_RESET,
+  ORDER_MY_LIST_SUCCESS,
 } from "../constants/orderConstants";
 import axios from "axios";
 
@@ -66,31 +69,62 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 };
 
+export const payOrder =
+  (orderId, paymentResult) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: ORDER_PAY_REQUEST });
 
-export const payOrder = (orderId, paymentResult)=>async(dispatch, getState)=>{
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `/api/orders/${orderId}/pay`,
+        paymentResult,
+        config
+      );
+
+      dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+    } catch (err) {
+      dispatch({
+        type: ORDER_PAY_FAIL,
+        payload:
+          err.response && err.response.data.message
+            ? err.response.data.message
+            : err.message,
+      });
+    }
+  };
+
+export const listMyOrders = () => async (dispatch, getState) => {
   try {
-    dispatch({type: ORDER_PAY_REQUEST})
+    dispatch({ type: ORDER_MY_LIST_REQUEST });
 
-    const {userLogin : {userInfo}, } = getState()
+    const {
+      userLogin: { userInfo },
+    } = getState();
 
     const config = {
-      headers:{
-        Authorization : `Bearer ${userInfo.token}`,
-        'Content-type' : 'application/json'
-      }
-    }
-    const {data} = await axios.put(`/api/orders/${orderId}/pay`, paymentResult, config)
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get("/api/orders/myorders", config);
 
-    dispatch({type: ORDER_PAY_SUCCESS, payload: data})
-
+    dispatch({ type: ORDER_MY_LIST_SUCCESS, payload: data });
   } catch (err) {
     dispatch({
-      type: ORDER_PAY_FAIL,
+      type: ORDER_MY_LIST_FAIL,
       payload:
         err.response && err.response.data.message
           ? err.response.data.message
           : err.message,
     });
-    
   }
-}
+};

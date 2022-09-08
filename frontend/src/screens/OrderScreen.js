@@ -101,12 +101,13 @@ const OrderScreen = () => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </Text>
-              {order.isPaid ?(
-                <Message type="success">Paid at {order.paidAt.split('T')[0]}</Message>
-              ):(
+              {order.isPaid ? (
+                <Message type="success">
+                  Paid at {order.paidAt.split("T")[0]}
+                </Message>
+              ) : (
                 <Message type="warning">Not paid</Message>
-              )
-              }
+              )}
             </Box>
 
             {/* Order Items */}
@@ -240,7 +241,7 @@ const OrderScreen = () => {
                         "AZyoR5ViNXEabpJyEGkFpgjjVomoqTMRmLEJSsFf1WqPXpH5ekeS3PkHp-KR6DF6aoAgcDKohuMVhT7O",
                       components: "buttons",
                     }}
-                  >   
+                  >
                     <PayPalButtons
                       createOrder={(_, actions) => {
                         return actions.order.create({
