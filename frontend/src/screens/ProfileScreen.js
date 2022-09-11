@@ -78,7 +78,7 @@ const ProfileScreen = () => {
 
   return (
     <Grid templateColumns={{ sm: "1fr", md: "1fr 1fr" }} py="5" gap="10">
-      <Flex w="full" alignItems="center" justifyContent="center" py="5">
+      <Flex w="full" alignItems="flex-start" justifyContent="center" py="5">
         <FormContainer>
           <Heading as="h1" mb="8" fontSize="3xl">
             User Profile
