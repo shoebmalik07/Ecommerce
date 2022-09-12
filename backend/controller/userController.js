@@ -13,7 +13,6 @@ const authUser = asyncHandler(async (req, res) => {
     email,
   });
 
-
   if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
@@ -82,14 +81,14 @@ const registerUser = asyncHandler(async (req, res) => {
 //@route  PUT /api/users/profile
 //@access private
 
-const updateUserProfile = asyncHandler(async(req,res)=>{
-  const user = await User.findById(req.user._id)
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
 
-  if(user){
-    user.name = req.body.name || user.name
-    user.email = req.body.email || user.email
-    if(req.user.password){
-      user.password = req.body.password
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.user.password) {
+      user.password = req.body.password;
     }
 
     const updatedUser = await user.save();
@@ -97,23 +96,44 @@ const updateUserProfile = asyncHandler(async(req,res)=>{
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      isAdmin : updatedUser.isAdmin,
-      token: generateToken(updatedUser._id)
-    })
-  }else{
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
     res.status(404);
-    throw new Error('User not found')
+    throw new Error("User not found");
   }
-})
-
+});
 
 //@desc get all users
 //@route  PUT /api/users/
 //@access private/admin
 
-const getUsers = asyncHandler(async(req,res)=>{
-  const users = await User.find({})
-  res.json(users)
-})
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+});
 
-export { authUser, getUserProfile, registerUser ,updateUserProfile, getUsers };
+//@desc Delete users
+//@route  DELETE /api/users/:id
+//@access private/admin
+
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    await user.remove();
+    res.json({ message: "user deleted" });
+  } else {
+    res.json(404);
+    throw new Error("user not found");
+  }
+});
+export {
+  authUser,
+  getUserProfile,
+  registerUser,
+  updateUserProfile,
+  getUsers,
+  deleteUser,
+};

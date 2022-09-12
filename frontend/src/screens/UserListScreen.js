@@ -20,7 +20,7 @@ import {
 } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink, Router, useNavigate } from "react-router-dom";
-import { listUsers, login } from "../actions/userAction";
+import { deleteUsers, listUsers, login } from "../actions/userAction";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
@@ -28,25 +28,30 @@ import React from "react";
 
 const UserListScreen = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const userList = useSelector((state) => state.userList);
   const { error, loading, users } = userList;
 
-  const userLogin  = useSelector(state=>state.userLogin)
-  const {userInfo} = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const userDelete = useSelector((state) => state.userDelete);
+  const { success: successDelete } = userDelete;
 
   useEffect(() => {
-    if(userInfo && userInfo.isAdmin){
-      dispatch(listUsers())
-    }else{
-      navigate('/login')
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listUsers());
+    } else {
+      navigate("/login");
     }
-  }, [dispatch, navigate, userInfo]);
+  }, [dispatch, navigate, userInfo, successDelete]);
 
-  const deleteHandler = ()=>{
-    console.log('delete')
-  }
+  const deleteHandler = (id) => {
+    if (window.confirm("are you sure?")) {
+      dispatch(deleteUsers(id));
+    }
+  };
   return (
     <>
       <Heading as="h1" fontSize="3xl" mb="5">
@@ -94,22 +99,22 @@ const UserListScreen = () => {
                     )}
                   </Td>
                   <Td>
-                    <Flex alignItems='center' justifyContent='center'>
-                    <Button 
-                    mr='4'
-                    as={RouterLink}
-                    to = {`/admin/user/${user._id}/edit`}
-                    colorScheme = 'teal'>
-                      <Icon as={IoPencilSharp} color= 'white' size= 'sm' />
-                    </Button>
-                    <Button
-                    mr='4'
-                    colorScheme='red'
-                    onClick={()=>deleteHandler(user._id)}
-                    >
-                      <Icon as = {IoTrashBinSharp} color='white' size = 'sm'/>
-                    </Button>
-
+                    <Flex alignItems="center" justifyContent="center">
+                      <Button
+                        mr="4"
+                        as={RouterLink}
+                        to={`/admin/user/${user._id}/edit`}
+                        colorScheme="teal"
+                      >
+                        <Icon as={IoPencilSharp} color="white" size="sm" />
+                      </Button>
+                      <Button
+                        mr="4"
+                        colorScheme="red"
+                        onClick={() => deleteHandler(user._id)}
+                      >
+                        <Icon as={IoTrashBinSharp} color="white" size="sm" />
+                      </Button>
                     </Flex>
                   </Td>
                 </Tr>
