@@ -21,6 +21,9 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from "../constants/userConstant";
 import { ORDER_MY_LIST_RESET } from "../constants/orderConstants";
 import axios from "axios";
@@ -201,3 +204,27 @@ export const deleteUsers = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const userUpdate = (user)=>async(dispatch,getState)=>{
+  try {
+    dispatch({type:USER_UPDATE_REQUEST})
+
+    const {userLogin:{userInfo}} = getState()
+    const config = {
+      headers:{
+        Authorization: `Bearer ${userInfo.token}`,
+        'Content-Type': 'application/json',
+      }
+    }
+    const {data} = await axios.put(`/api/users/${user._id}`, user, config)
+    dispatch({type: USER_UPDATE_SUCCESS, payload: data})
+  } catch (err) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+}
