@@ -205,7 +205,7 @@ export const deleteUsers = (id) => async (dispatch, getState) => {
   }
 };
 
-export const userUpdate = (user)=>async(dispatch,getState)=>{
+export const updateUser = (user)=>async(dispatch,getState)=>{
   try {
     dispatch({type:USER_UPDATE_REQUEST})
 

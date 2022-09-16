@@ -39,7 +39,7 @@ const ProductScreen = () => {
     <>
       <Flex mb="5">
         <Button as={RouterLink} to="/" colorScheme="orange">
-          Go Back{" "}
+          Go Back
         </Button>
       </Flex>
 
