@@ -22,7 +22,7 @@ import { useState, useEffect } from "react";
 import { IoWarning } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { getUserDetails, updateUserProfile } from "../actions/userAction";
+import { getUserDetails, getUserProfile, updateUserProfile } from "../actions/userAction";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import { listMyOrders } from "../actions/orderActions";
@@ -39,8 +39,8 @@ const ProfileScreen = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
+  const userProfile = useSelector((state) => state.userProfile);
+  const { loading, error, user } = userProfile;
   // console.log(user)
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -53,12 +53,14 @@ const ProfileScreen = () => {
   const { loading: loadingOrders, error: errorOrders, orders } = orderMyList;
   console.log(orders);
 
+
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
       if (!user.name) {
-        dispatch(getUserDetails());
+        dispatch(getUserProfile())
         dispatch(listMyOrders());
       } else {
         setName(user.name);

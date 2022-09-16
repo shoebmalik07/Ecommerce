@@ -24,6 +24,10 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
+  USER_PROFILE_REQUEST,
+  USER_PROFILE_SUCCESS,
+  USER_PROFILE_RESET,
+  USER_PROFILE_FAIL
 } from "../constants/userConstant";
 import { ORDER_MY_LIST_RESET } from "../constants/orderConstants";
 import axios from "axios";
@@ -64,6 +68,7 @@ export const logout = () => (dispatch) => {
   dispatch({ type: ORDER_MY_LIST_RESET });
   dispatch({ type: USER_UPDATE_PROFILE_RESET });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({type:USER_PROFILE_RESET})
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -97,7 +102,7 @@ export const register = (name, email, password) => async (dispatch) => {
   }
 };
 
-export const getUserDetails = () => async (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
 
@@ -110,7 +115,7 @@ export const getUserDetails = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get("/api/users/profile", config);
+    const { data } = await axios.get(`/api/users/${id}`, config);
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (err) {
     dispatch({
@@ -122,6 +127,34 @@ export const getUserDetails = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const getUserProfile = ()=>async(dispatch,getState)=>{
+  try {
+    dispatch({type:USER_PROFILE_REQUEST})
+
+    const {userLogin:{userInfo}} = getState()
+
+    const config = {
+      headers:{
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+
+    const {data} = await axios.get('/api/users/profile', config)
+
+    dispatch({type:USER_PROFILE_SUCCESS, payload:data})
+    
+  } catch (err) {
+    dispatch({
+			type: USER_PROFILE_FAIL,
+			payload:
+				err.response && err.response.data.message
+					? err.response.data.message
+					: err.response,
+		});
+    
+  }
+}
 
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {

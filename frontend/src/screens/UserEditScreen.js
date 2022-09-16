@@ -59,7 +59,12 @@ const UserEditScreen = () => {
 
   return (
     <>
-      <Button as={RouterLink} to="/admin/userlist" colorScheme='orange' w='5rem'>
+      <Button
+        as={RouterLink}
+        to="/admin/userlist"
+        colorScheme="orange"
+        w="5rem"
+      >
         Go Back
       </Button>
       <Flex w="full" alignItems="center" justifyContent="center" py="5">
@@ -97,7 +102,7 @@ const UserEditScreen = () => {
 
               <Spacer h="3" />
 
-              <FormControl id="isAdmin" isRequired>
+              <FormControl id="isAdmin" >
                 <FormLabel>Is Admin?</FormLabel>
                 <Checkbox
                   size="lg"
