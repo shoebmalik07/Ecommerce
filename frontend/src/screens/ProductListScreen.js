@@ -17,7 +17,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
-import { listProducts } from "../actions/productAction";
+import { listProducts, deleteProduct } from "../actions/productAction";
 
 const ProductListScreen = () => {
   const dispatch = useDispatch();
@@ -29,13 +29,26 @@ const ProductListScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    success: successDelete,
+    error: errorDelete,
+  } = productDelete;
+
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listProducts());
     } else {
       navigate("/login");
     }
-  }, [dispatch, navigate, userInfo]);
+  }, [dispatch, navigate, userInfo, successDelete]);
+
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(deleteProduct(id));
+    }
+  };
 
   const createProductHandler = () => {
     //create products
@@ -51,6 +64,10 @@ const ProductListScreen = () => {
           Create Products
         </Button>
       </Flex>
+
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message type="error">{errorDelete}</Message>}
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -86,7 +103,11 @@ const ProductListScreen = () => {
                       >
                         <Icon as={IoPencilSharp} color="white" size="sm" />
                       </Button>
-                      <Button mr="4" colorScheme="red">
+                      <Button
+                        mr="4"
+                        colorScheme="red"
+                        onClick={() => deleteHandler(product._id)}
+                      >
                         <Icon as={IoTrashBinSharp} color="white" size="sm" />
                       </Button>
                     </Flex>
