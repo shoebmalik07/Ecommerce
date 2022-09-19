@@ -85,7 +85,7 @@ const updateProduct = asyncHandler(async(req,res)=>{
     product.countInStock = countInStock;
 
     const updatedProduct = await product.save()
-    req.json(updatedProduct)
+    res.json(updatedProduct)
   }else{
     res.status(404)
     throw new Error('product not found')

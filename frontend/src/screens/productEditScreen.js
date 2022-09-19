@@ -8,6 +8,7 @@ import {
   Link,
   Spacer,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
@@ -40,6 +41,25 @@ const ProductEditScreen = () => {
     error: errorUpdate,
     success: successUpdate,
   } = productUpdate;
+
+const uploadFileHandler= async(e)=>{
+  const file = e.target.files[0]
+  const formData = new FormData()
+  formData.append('image', file)
+
+  try {
+    const config = {
+      headers : {
+        'Content-Type' : 'mutlti/form-data'
+      }
+    }
+    const {data} = await axios.post('/api/uploads', formData, config)
+    setImage(data)
+  } catch (err) {
+    console.error(err)
+    
+  }
+}
 
   useEffect(() => {
     if (successUpdate) {
@@ -128,13 +148,18 @@ const ProductEditScreen = () => {
               <Spacer h='3' />
 
               {/* IMAGE */}
-              <FormControl id='image' isRequired>
+              <FormControl id='image' >
                 <FormLabel>Image</FormLabel>
                 <Input
                   type='text'
                   placeholder='Enter image url'
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
+                />
+                <Input
+                  type='file'
+                  id = 'image-file'
+                  onChange={uploadFileHandler}
                 />
               </FormControl>
               <Spacer h='3' />
