@@ -9,7 +9,7 @@ import {
   productUpdateReducer,
 } from "./reducers/productReducer";
 import { cartReducer } from "./reducers/cartReducer";
-import {orderCreateReducer, orderDetailsReducer, orderMyListReducer, orderPayReducer} from './reducers/orderReducers'
+import {orderCreateReducer, orderDetailsReducer, orderListReducer, orderMyListReducer, orderPayReducer} from './reducers/orderReducers'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userUpdateReducer, userProfileReducer } from "./reducers/userReducer";
 
 // localStorage.removeItem('userInfo')
@@ -32,7 +32,8 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails : orderDetailsReducer,
   orderPay : orderPayReducer,
-  orderMyList : orderMyListReducer
+  orderMyList : orderMyListReducer,
+  orderList : orderListReducer,
 
 
 });
