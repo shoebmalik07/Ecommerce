@@ -47,18 +47,18 @@ const Header = () => {
     >
       <Heading
         as="h1"
-        fontSize='2xl'
+        fontSize='4xl'
         fontWeight="bold"
         size="md"
         letterSpacing="md"
-        color="black"
+        color="orange.500"
       >
         <Link
           as={RouterLink}
           to="/"
-          _hover={{ color: "blackAlpha", textDecor: "none" }}
+          _hover={{ color: "blackAlpha", textDecor: "none", opacity: '0.8' }}
         >
-          Clothing Hub
+          Shopzy
         </Link>
       </Heading>
       <Box
@@ -93,7 +93,7 @@ const Header = () => {
             <MenuButton
               as={Button}
               rightIcon={<IoChevronDown />}
-              _hover={{ textDecor: "none", opacity: "0.7" }}
+              _hover={{ textDecor: "none", }}
             >
               {userInfo.name}
             </MenuButton>
@@ -127,12 +127,12 @@ const Header = () => {
           <Menu>
             <MenuButton
               ml="5"
-              color="white"
+              color="black"
               fontSize="sm"
               fontWeight="semibold"
               as={Link}
               textTransform="uppercase"
-              _hover={{ textDecoration: "none", opacity: "0.7" }}
+              _hover={{ textDecoration: "none", }}
             >
               Manage <Icon as={IoChevronDown} />
             </MenuButton>
