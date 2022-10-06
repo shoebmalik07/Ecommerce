@@ -39,7 +39,7 @@ const Header = () => {
       wrap="wrap"
       py="6"
       px="6"
-      bgColor="gray.800"
+      bgColor="ButtonFace"
       w="100%"
       position="fixed"
       top="0"
@@ -47,17 +47,18 @@ const Header = () => {
     >
       <Heading
         as="h1"
+        fontSize='2xl'
         fontWeight="bold"
         size="md"
         letterSpacing="md"
-        color="whiteAlpha.800"
+        color="black"
       >
         <Link
           as={RouterLink}
           to="/"
-          _hover={{ color: "gray.500", textDecor: "none" }}
+          _hover={{ color: "blackAlpha", textDecor: "none" }}
         >
-          RST STORE
+          Clothing Hub
         </Link>
       </Heading>
       <Box
@@ -74,7 +75,7 @@ const Header = () => {
         <Link
           as={RouterLink}
           to="/cart"
-          color="whiteAlpha.600"
+          color="black"
           fontSize="sm"
           letterSpacing="wide"
           textTransform="uppercase"
@@ -82,7 +83,7 @@ const Header = () => {
           display="flex"
           fontWeight="bold"
           alignItems="center"
-          _hover={{ color: "whiteAlpha.800" }}
+          _hover={{ color: "blackAlpha" }}
         >
           <Icon as={HiShoppingBag} w="4" h="4" mr="1" />
           Cart
@@ -107,7 +108,7 @@ const Header = () => {
           <Link
             as={RouterLink}
             to="/login"
-            color="whiteAlpha.600"
+            color="black"
             fontSize="sm"
             letterSpacing="wide"
             textTransform="uppercase"
@@ -115,7 +116,7 @@ const Header = () => {
             display="flex"
             fontWeight="bold"
             alignItems="center"
-            _hover={{ color: "whiteAlpha.800" }}
+            _hover={{ color: "blackAlpha" }}
           >
             <Icon as={HiUser} w="4" h="4" mr="1" />
             Login

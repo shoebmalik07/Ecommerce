@@ -18,8 +18,8 @@ import {
      my="0"
      width={{ lg: "100%", md: "100%", base: "100%" }}
      height={{ lg: "400px", md: "2xl", base: "300px" }}
-     backgroundImage="url('/images/banner/Banner15.jpg')"
-     backgroundSize={{ lg: "cover", md: "cover", base: "cover" }}
+     backgroundImage="url('/images/banner/Banner16.jpg')"
+     backgroundSize={{ lg: "", md: "cover", base: "cover" }}
      backgroundPosition={{ lg: "center", md: "center", base: "center" }}
      backgroundRepeat="no-repeat"
      display="flex"
@@ -33,7 +33,7 @@ import {
      <Heading
       mx={{ lg: "8rem", md: "4rem", base: "1rem" }}
       alignContent="center"
-      color="black"
+      color="white"
       as="h2"
       fontSize={{ lg: "3rem", md: "2rem", base: "2rem" }}
       fontWeight="bold"

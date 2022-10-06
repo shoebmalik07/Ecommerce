@@ -17,6 +17,7 @@ import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/productEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import ProductDisplayScreen from './screens/ProductDisplayScreen';
 
 
 
@@ -31,12 +32,14 @@ const App = () => {
         mt='72px'
         py='6'
         px='6'
-        bgColor='gray.200'
+        bgColor='AppWorkspace'
 
       >
 
         <Routes>
           <Route path='/' element={<HomeScreen />} />
+          <Route path='/men' element={<ProductDisplayScreen  category='men'/>} />
+          <Route path='/women' element={<ProductDisplayScreen category='women' />} />
           <Route path='/product/:id' element={<ProductScreen />} />
           <Route path='/cart/:id' element={<CartScreen />} />
           <Route path='/cart' element={<CartScreen />} />
