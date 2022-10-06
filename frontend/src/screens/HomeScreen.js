@@ -1,10 +1,13 @@
-import { Heading, Grid, Flex } from "@chakra-ui/react";
+import { Heading, Grid, Flex, Spacer } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import Product from "../components/Product";
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productAction'
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import CaptionCarousel from "../components/Carousel";
+import HomeBannerOne from "../components/BannerOne";
+import HomeBannerTwo from "../components/BannerTwo";
 
 
 
@@ -24,6 +27,11 @@ const HomeScreen = () => {
 
     return (
         <div>
+        <CaptionCarousel/>
+        <Spacer h='5'/>
+        <HomeBannerOne/>
+        <Spacer h='5'/>
+        
 
             <Heading as='h2' mb='8' fontSize='3xl'>
                 Latest Products
@@ -48,6 +56,8 @@ const HomeScreen = () => {
                         }
                     </Grid>
                 )}
+
+                <HomeBannerTwo/>
 
         </div>
     )
