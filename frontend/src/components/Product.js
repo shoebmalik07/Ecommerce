@@ -9,7 +9,9 @@ const Product = ({ product }) => {
         <Link
         as={RouterLink}
          to={`/product/${product._id}`}
-          _hover={{ textDecor: 'none' }} >
+          _hover={{ textDecor: 'none', }}
+        //   boxShadow ='1px 1px 5px 1px gray' 
+          >
             <Box
                 maxW='sm'
                 borderRadius='lg'

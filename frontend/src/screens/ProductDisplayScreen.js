@@ -27,10 +27,10 @@ import {
  
   const productList = useSelector((state) => state.productList);
   let { loading, error, products } = productList;
-  console.log(products);
+  
  
   products = products.filter((product) => product.category === category);
-  console.log(products);
+  
  
   useEffect(() => {
    dispatch(listProducts());
@@ -57,7 +57,6 @@ import {
  
   const submitHandler = (e) => {
    e.preventDefault();
-   // console.log(searchQuery);
   };
  
   return (
@@ -124,7 +123,7 @@ import {
         mb='4'
         mt='8'
        >
-        {category}
+        {category? category.slice(0,1).toUpperCase() + category.slice(1) : ''}
        </Heading>
  
        {loading ? (

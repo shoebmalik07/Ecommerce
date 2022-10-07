@@ -13,7 +13,8 @@ import {
   MenuList,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { HiShoppingBag, HiUser, HiOutlineMenuAlt3 } from "react-icons/hi";
+import { HiUser, HiOutlineMenuAlt3 } from "react-icons/hi";
+import { FaShoppingCart } from "react-icons/fa";
 import { IoChevronDown } from "react-icons/io5";
 import { logout } from "../actions/userAction";
 
@@ -65,7 +66,7 @@ const Header = () => {
         display={{ base: "block", md: "none" }}
         onClick={() => setShow(!show)}
       >
-        <Icon as={HiOutlineMenuAlt3} w="6" h="6" color="white" />
+        <Icon as={HiOutlineMenuAlt3} w="6" h="6" color="orange.500" />
       </Box>
       <Box
         display={{ base: show ? "block" : "none", md: "flex" }}
@@ -75,25 +76,29 @@ const Header = () => {
         <Link
           as={RouterLink}
           to="/cart"
-          color="black"
+          color="orange.500"
           fontSize="sm"
           letterSpacing="wide"
           textTransform="uppercase"
-          mr="5"
+          mr="8"
           display="flex"
           fontWeight="bold"
           alignItems="center"
+          justifyContent={'flex-end'}
           _hover={{ color: "blackAlpha" }}
         >
-          <Icon as={HiShoppingBag} w="4" h="4" mr="1" />
+          <Icon as={FaShoppingCart} w="4" h="4" mr="1" color='orange.500' />
           Cart
         </Link>
         {userInfo ? (
+          <Flex justifyContent='flex-end' alignItems='center'>
           <Menu>
             <MenuButton
               as={Button}
               rightIcon={<IoChevronDown />}
               _hover={{ textDecor: "none", }}
+              color = 'orange.500'
+              fontWeight='bold'
             >
               {userInfo.name}
             </MenuButton>
@@ -104,11 +109,12 @@ const Header = () => {
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
           </Menu>
+          </Flex>
         ) : (
           <Link
             as={RouterLink}
             to="/login"
-            color="black"
+            color="orange.500"
             fontSize="sm"
             letterSpacing="wide"
             textTransform="uppercase"
@@ -116,6 +122,7 @@ const Header = () => {
             display="flex"
             fontWeight="bold"
             alignItems="center"
+            justifyContent={'flex-end'}
             _hover={{ color: "blackAlpha" }}
           >
             <Icon as={HiUser} w="4" h="4" mr="1" />
@@ -123,13 +130,14 @@ const Header = () => {
           </Link>
         )}
         {/* Admin Menu */}
+        <Flex justifyContent='flex-end' alignItems='center' mr={'4'}>
         {userInfo && userInfo.isAdmin && (
           <Menu>
             <MenuButton
               ml="5"
-              color="black"
+              color="orange.500"
               fontSize="sm"
-              fontWeight="semibold"
+              fontWeight="bold"
               as={Link}
               textTransform="uppercase"
               _hover={{ textDecoration: "none", }}
@@ -149,6 +157,7 @@ const Header = () => {
             </MenuList>
           </Menu>
         )}
+        </Flex>
       </Box>
     </Flex>
   );

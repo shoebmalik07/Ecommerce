@@ -100,7 +100,7 @@ const ProductScreen = () => {
               my="5"
               fontSize="4xl"
               fontWeight="bold"
-              color="teal.600"
+              color="orange.500"
             >
               {`${product.price} INR`}
             </Heading>
