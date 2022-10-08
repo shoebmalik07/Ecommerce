@@ -1,6 +1,8 @@
 
 # Full Stack Ecommerce App
 
+## Shopzy
+
 A Full Stack Ecommerce Web App built in MERN Stack.
 
 The backend of this app is completely in Node js. The App also contains various middlewares that are built from scratch. Tha App in the backend strongly follows MVC pattern.
