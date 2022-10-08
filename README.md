@@ -43,8 +43,8 @@ To run this project, you will need to add the following environment variables to
 Clone to the reactEcommerce repository and run the following commands
 
 ```bash
-  git clone https://github.com/mugaira/reactEcommerce.git
-  cd reactEcommerce
+  git clone https://github.com/shoebmalik07/Ecommerce.git
+  cd Ecommerce
   npm Install 
   npm run server
 ```
