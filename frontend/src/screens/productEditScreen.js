@@ -7,16 +7,16 @@ import {
   Input,
   Link,
   Spacer,
-} from '@chakra-ui/react';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
-import { listProductDetails, updateProduct } from '../actions/productAction';
-import FormContainer from '../components/FormContainer';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import { PRODUCT_UPDATE_RESET } from '../constants/productConstant';
+} from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
+import { listProductDetails, updateProduct } from "../actions/productAction";
+import FormContainer from "../components/FormContainer";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import { PRODUCT_UPDATE_RESET } from "../constants/productConstant";
 
 const ProductEditScreen = () => {
   const dispatch = useDispatch();
@@ -24,13 +24,13 @@ const ProductEditScreen = () => {
 
   const { id: productId } = useParams();
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
-  const [image, setImage] = useState('');
-  const [brand, setBrand] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
-  const [countInStock, setCountInStock] = useState('');
+  const [image, setImage] = useState("");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [countInStock, setCountInStock] = useState("");
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -42,24 +42,23 @@ const ProductEditScreen = () => {
     success: successUpdate,
   } = productUpdate;
 
-const uploadFileHandler= async(e)=>{
-  const file = e.target.files[0]
-  const formData = new FormData()
-  formData.append('image', file)
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
 
-  try {
-    const config = {
-      headers : {
-        'Content-Type' : 'mutlti/form-data'
-      }
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "mutlti/form-data",
+        },
+      };
+      const { data } = await axios.post("/api/uploads", formData, config);
+      setImage(data);
+    } catch (err) {
+      console.error(err);
     }
-    const {data} = await axios.post('/api/uploads', formData, config)
-    setImage(data)
-  } catch (err) {
-    console.error(err)
-    
-  }
-}
+  };
 
   useEffect(() => {
     if (successUpdate) {
@@ -108,115 +107,116 @@ const uploadFileHandler= async(e)=>{
         Go Back
       </Button>
 
-      <Flex w='full' alignItems='center' justifyContent='center' py='5'>
+      <Flex w="full" alignItems="center" justifyContent="center" py="5">
         <FormContainer>
-          <Heading as='h1' mb='8' fontSize='3xl'>
+          <Heading as="h1" mb="8" fontSize="3xl">
             Edit Product
           </Heading>
 
           {loadingUpdate && <Loader />}
-          {errorUpdate && <Message type='error'>{errorUpdate}</Message>}
+          {errorUpdate && <Message type="error">{errorUpdate}</Message>}
 
           {loading ? (
             <Loader />
           ) : error ? (
-            <Message type='error'>{error}</Message>
+            <Message type="error">{error}</Message>
           ) : (
             <form onSubmit={submitHandler}>
               {/* NAME */}
-              <FormControl id='name' isRequired>
+              <FormControl id="name" isRequired>
                 <FormLabel>Name</FormLabel>
                 <Input
-                  type='text'
-                  placeholder='Enter name'
+                  type="text"
+                  placeholder="Enter name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               {/* PRICE */}
-              <FormControl id='price' isRequired>
+              <FormControl id="price" isRequired>
                 <FormLabel>Price</FormLabel>
                 <Input
-                  type='number'
-                  placeholder='Enter price'
+                  type="number"
+                  placeholder="Enter price"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               {/* IMAGE */}
-              <FormControl id='image' >
+              <FormControl id="image">
                 <FormLabel>Image</FormLabel>
                 <Input
-                  type='text'
-                  placeholder='Enter image url'
+                  type="text"
+                  placeholder="Enter image url"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                 />
                 <Input
-                  type='file'
-                  id = 'image-file'
+                  type="file"
+                  id="image-file"
                   onChange={uploadFileHandler}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               {/* DESCRIPTION */}
-              <FormControl id='description' isRequired>
+              <FormControl id="description" isRequired>
                 <FormLabel>Description</FormLabel>
                 <Input
-                  type='text'
-                  placeholder='Enter description'
+                  type="text"
+                  placeholder="Enter description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               {/* BRAND */}
-              <FormControl id='brand' isRequired>
+              <FormControl id="brand" isRequired>
                 <FormLabel>Brand</FormLabel>
                 <Input
-                  type='text'
-                  placeholder='Enter brand'
+                  type="text"
+                  placeholder="Enter brand"
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               {/* CATEGORY */}
-              <FormControl id='category' isRequired>
+              <FormControl id="category" isRequired>
                 <FormLabel>Category</FormLabel>
                 <Input
-                  type='text'
-                  placeholder='Enter category'
+                  type="text"
+                  placeholder="Enter category"
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               {/* COUNT IN STOCK */}
-              <FormControl id='countInStock' isRequired>
+              <FormControl id="countInStock" isRequired>
                 <FormLabel>Count In Stock</FormLabel>
                 <Input
-                  type='number'
-                  placeholder='Product in stock'
+                  type="number"
+                  placeholder="Product in stock"
                   value={countInStock}
                   onChange={(e) => setCountInStock(e.target.value)}
                 />
               </FormControl>
-              <Spacer h='3' />
+              <Spacer h="3" />
 
               <Button
-                type='submit'
+                type="submit"
                 isLoading={loading}
-                colorScheme='teal'
-                mt='4'>
+                colorScheme="teal"
+                mt="4"
+              >
                 Update
               </Button>
             </form>

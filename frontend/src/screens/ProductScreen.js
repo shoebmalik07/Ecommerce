@@ -189,44 +189,45 @@ const ProductScreen = () => {
               <Message type="error">{errorProductReview}</Message>
             )}
 
-            {
-              userInfo ?(
-                <form onSubmit={submitHandler}>
-                <FormControl id='rating' mb='3'>
-											<FormLabel>Rating</FormLabel>
-											<Select
-												placeholder='Select Option'
-												value={rating}
-												onChange={(e) => setRating(e.target.value)}>
-												<option>Select...</option>
-												<option value='1'>1 - Poor</option>
-												<option value='2'>2 - Okay</option>
-												<option value='3'>3 - Good</option>
-												<option value='4'>4 - Very Good</option>
-												<option value='5'>5 - Excellent</option>
-											</Select>
-										</FormControl>
+            {userInfo ? (
+              <form onSubmit={submitHandler}>
+                <FormControl id="rating" mb="3">
+                  <FormLabel>Rating</FormLabel>
+                  <Select
+                    placeholder="Select Option"
+                    value={rating}
+                    onChange={(e) => setRating(e.target.value)}
+                  >
+                    <option>Select...</option>
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Okay</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                  </Select>
+                </FormControl>
 
-                    <FormControl id='comment' mb='3'>
-											<FormLabel>Comment</FormLabel>
-											<Textarea
-												value={comment}
-												onChange={(e) => setComment(e.target.value)}>
-                        </Textarea>
-										</FormControl>
+                <FormControl id="comment" mb="3">
+                  <FormLabel>Comment</FormLabel>
+                  <Textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  ></Textarea>
+                </FormControl>
 
-										<Button colorScheme='teal' type='submit'>
-											Post Review
-										</Button>
-
-                </form>
-              ):(
-                <Message>
-                  Please <Link as ={RouterLink} to = '/login'>login</Link>
-                  to write a review
-                </Message>
-              )
-            }
+                <Button colorScheme="teal" type="submit">
+                  Post Review
+                </Button>
+              </form>
+            ) : (
+              <Message>
+                Please{" "}
+                <Link as={RouterLink} to="/login">
+                  login
+                </Link>
+                to write a review
+              </Message>
+            )}
           </Box>
         </Box>
       </Box>

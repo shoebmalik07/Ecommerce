@@ -48,7 +48,7 @@ const Header = () => {
     >
       <Heading
         as="h1"
-        fontSize='4xl'
+        fontSize="4xl"
         fontWeight="bold"
         size="md"
         letterSpacing="md"
@@ -57,7 +57,7 @@ const Header = () => {
         <Link
           as={RouterLink}
           to="/"
-          _hover={{ color: "blackAlpha", textDecor: "none", opacity: '0.8' }}
+          _hover={{ color: "blackAlpha", textDecor: "none", opacity: "0.8" }}
         >
           Shopzy
         </Link>
@@ -84,31 +84,31 @@ const Header = () => {
           display="flex"
           fontWeight="bold"
           alignItems="center"
-          justifyContent={'flex-end'}
+          justifyContent={"flex-end"}
           _hover={{ color: "blackAlpha" }}
         >
-          <Icon as={FaShoppingCart} w="4" h="4" mr="1" color='orange.500' />
+          <Icon as={FaShoppingCart} w="4" h="4" mr="1" color="orange.500" />
           Cart
         </Link>
         {userInfo ? (
-          <Flex justifyContent='flex-end' alignItems='center'>
-          <Menu>
-            <MenuButton
-              as={Button}
-              rightIcon={<IoChevronDown />}
-              _hover={{ textDecor: "none", }}
-              color = 'orange.500'
-              fontWeight='bold'
-            >
-              {userInfo.name}
-            </MenuButton>
-            <MenuList>
-              <MenuItem as={RouterLink} to="/profile">
-                Profile
-              </MenuItem>
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
+          <Flex justifyContent="flex-end" alignItems="center">
+            <Menu>
+              <MenuButton
+                as={Button}
+                rightIcon={<IoChevronDown />}
+                _hover={{ textDecor: "none" }}
+                color="orange.500"
+                fontWeight="bold"
+              >
+                {userInfo.name}
+              </MenuButton>
+              <MenuList>
+                <MenuItem as={RouterLink} to="/profile">
+                  Profile
+                </MenuItem>
+                <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         ) : (
           <Link
@@ -122,7 +122,7 @@ const Header = () => {
             display="flex"
             fontWeight="bold"
             alignItems="center"
-            justifyContent={'flex-end'}
+            justifyContent={"flex-end"}
             _hover={{ color: "blackAlpha" }}
           >
             <Icon as={HiUser} w="4" h="4" mr="1" />
@@ -130,33 +130,33 @@ const Header = () => {
           </Link>
         )}
         {/* Admin Menu */}
-        <Flex justifyContent='flex-end' alignItems='center' mr={'4'}>
-        {userInfo && userInfo.isAdmin && (
-          <Menu>
-            <MenuButton
-              ml="5"
-              color="orange.500"
-              fontSize="sm"
-              fontWeight="bold"
-              as={Link}
-              textTransform="uppercase"
-              _hover={{ textDecoration: "none", }}
-            >
-              Manage <Icon as={IoChevronDown} />
-            </MenuButton>
-            <MenuList>
-              <MenuItem as={RouterLink} to="/admin/userlist">
-                All Users
-              </MenuItem>
-              <MenuItem as={RouterLink} to="/admin/productlist">
-                All Products
-              </MenuItem>
-              <MenuItem as={RouterLink} to="/admin/orderlist">
-                All Orders
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        )}
+        <Flex justifyContent="flex-end" alignItems="center" mr={"4"}>
+          {userInfo && userInfo.isAdmin && (
+            <Menu>
+              <MenuButton
+                ml="5"
+                color="orange.500"
+                fontSize="sm"
+                fontWeight="bold"
+                as={Link}
+                textTransform="uppercase"
+                _hover={{ textDecoration: "none" }}
+              >
+                Manage <Icon as={IoChevronDown} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem as={RouterLink} to="/admin/userlist">
+                  All Users
+                </MenuItem>
+                <MenuItem as={RouterLink} to="/admin/productlist">
+                  All Products
+                </MenuItem>
+                <MenuItem as={RouterLink} to="/admin/orderlist">
+                  All Orders
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          )}
         </Flex>
       </Box>
     </Flex>

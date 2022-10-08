@@ -102,7 +102,7 @@ const UserEditScreen = () => {
 
               <Spacer h="3" />
 
-              <FormControl id="isAdmin" >
+              <FormControl id="isAdmin">
                 <FormLabel>Is Admin?</FormLabel>
                 <Checkbox
                   size="lg"

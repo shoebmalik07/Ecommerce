@@ -10,35 +10,46 @@ import {
   productReviewCreateReducer,
 } from "./reducers/productReducer";
 import { cartReducer } from "./reducers/cartReducer";
-import {orderCreateReducer, orderDeliverReducer, orderDetailsReducer, orderListReducer, orderMyListReducer, orderPayReducer} from './reducers/orderReducers'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userUpdateReducer, userProfileReducer } from "./reducers/userReducer";
-
-// localStorage.removeItem('userInfo')
+import {
+  orderCreateReducer,
+  orderDeliverReducer,
+  orderDetailsReducer,
+  orderListReducer,
+  orderMyListReducer,
+  orderPayReducer,
+} from "./reducers/orderReducers";
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userDetailsReducer,
+  userUpdateProfileReducer,
+  userListReducer,
+  userUpdateReducer,
+  userProfileReducer,
+} from "./reducers/userReducer";
 
 const reducer = combineReducers({
   productList: productListReducer,
   productDetails: productDetailsReducer,
-  productDelete : productDeleteReducer,
+  productDelete: productDeleteReducer,
   productCreate: productCreateReducer,
-  productUpdate : productUpdateReducer,
-  productReviewCreate:productReviewCreateReducer,
+  productUpdate: productUpdateReducer,
+  productReviewCreate: productReviewCreateReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
-  userList : userListReducer,
-  userDelete : userDetailsReducer,
-  userUpdate : userUpdateReducer,
-  userProfile:userProfileReducer,
-  userUpdateProfile : userUpdateProfileReducer,
+  userList: userListReducer,
+  userDelete: userDetailsReducer,
+  userUpdate: userUpdateReducer,
+  userProfile: userProfileReducer,
+  userUpdateProfile: userUpdateProfileReducer,
   orderCreate: orderCreateReducer,
-  orderDetails : orderDetailsReducer,
-  orderPay : orderPayReducer,
-  orderMyList : orderMyListReducer,
-  orderList : orderListReducer,
-  orderDeliver : orderDeliverReducer,
-
-
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
+  orderMyList: orderMyListReducer,
+  orderList: orderListReducer,
+  orderDeliver: orderDeliverReducer,
 });
 const cartItemsFromStorage = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
@@ -48,18 +59,19 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress'))
-  : {}
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : {};
 
-const paymentMethodFromStorage =localStorage.getItem('paymentMethod')
-  ? JSON.parse(localStorage.getItem('paymentMethod'))
-  :'paypal'
+const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
+  ? JSON.parse(localStorage.getItem("paymentMethod"))
+  : "paypal";
 const intialState = {
-  cart: { cartItems: cartItemsFromStorage,
-          shippingAddress: shippingAddressFromStorage,
-          paymentMethod: paymentMethodFromStorage,
-           },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 };
 

@@ -25,7 +25,7 @@ const LoginScreen = () => {
   const navigate = useNavigate();
 
   let [searchParams] = useSearchParams();
-  let redirect = searchParams.get("redirect") || "/"
+  let redirect = searchParams.get("redirect") || "/";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -73,9 +73,7 @@ const LoginScreen = () => {
               type="password"
               placeholder="***********"
               value={password}
-              onChange={(e) => 
-                setPassword(e.target.value)
-              }
+              onChange={(e) => setPassword(e.target.value)}
             />
           </FormControl>
 

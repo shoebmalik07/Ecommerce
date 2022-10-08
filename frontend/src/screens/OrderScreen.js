@@ -17,10 +17,17 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { getOrderDetails, payOrder, deliverOrder } from "../actions/orderActions";
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from "../actions/orderActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from "../constants/orderConstants";
+import {
+  ORDER_PAY_RESET,
+  ORDER_DELIVER_RESET,
+} from "../constants/orderConstants";
 
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
@@ -34,11 +41,11 @@ const OrderScreen = () => {
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
 
-  const userLogin = useSelector(state=>state.userLogin)
-  const {userInfo}  = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
-  const orderDeliver = useSelector(state =>state.orderDeliver)
-  const {loading:loadingDeliver, success: successDeliver} = orderDeliver
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   if (!loading) {
     order.itemsPrice = order.orderItems.reduce(
@@ -49,19 +56,19 @@ const OrderScreen = () => {
 
   useEffect(() => {
     dispatch({ type: ORDER_PAY_RESET });
-    dispatch({type:ORDER_DELIVER_RESET})
+    dispatch({ type: ORDER_DELIVER_RESET });
     if (!order || successPay) {
       dispatch({ type: ORDER_PAY_RESET });
-      dispatch({type:ORDER_DELIVER_RESET})
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     }
-  }, [dispatch, orderId, order, successPay,successDeliver]);
+  }, [dispatch, orderId, order, successPay, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
   };
 
-  const deliverHandler = ()=>dispatch(deliverOrder(order))
+  const deliverHandler = () => dispatch(deliverOrder(order));
 
   return loading ? (
     <Loader />
@@ -281,18 +288,21 @@ const OrderScreen = () => {
                   </PayPalScriptProvider>
                 )}
               </Box>
-              
             )}
             {/* order deliver button */}
-            {loadingDeliver&& <Loader/>}
-            {order.isPaid && userInfo && userInfo.isAdmin && !order.isDelivered && (
-              <Button
-              type='button'
-									colorScheme='teal'
-									onClick={deliverHandler}>
+            {loadingDeliver && <Loader />}
+            {order.isPaid &&
+              userInfo &&
+              userInfo.isAdmin &&
+              !order.isDelivered && (
+                <Button
+                  type="button"
+                  colorScheme="teal"
+                  onClick={deliverHandler}
+                >
                   Mark as delivered
-              </Button>
-            )}
+                </Button>
+              )}
           </Flex>
         </Grid>
       </Flex>

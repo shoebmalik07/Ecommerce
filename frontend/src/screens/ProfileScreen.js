@@ -22,12 +22,15 @@ import { useState, useEffect } from "react";
 import { IoWarning } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { getUserDetails, getUserProfile, updateUserProfile } from "../actions/userAction";
+import {
+  getUserDetails,
+  getUserProfile,
+  updateUserProfile,
+} from "../actions/userAction";
 import FormContainer from "../components/FormContainer";
 import Message from "../components/Message";
 import { listMyOrders } from "../actions/orderActions";
 import Loader from "../components/Loader";
-// import Icon from "@chakra";
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
@@ -53,14 +56,12 @@ const ProfileScreen = () => {
   const { loading: loadingOrders, error: errorOrders, orders } = orderMyList;
   console.log(orders);
 
-
-
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
       if (!user.name) {
-        dispatch(getUserProfile())
+        dispatch(getUserProfile());
         dispatch(listMyOrders());
       } else {
         setName(user.name);

@@ -36,7 +36,6 @@ const PaymentScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log('i reached here')
     dispatch(savePaymentMethod(paymentMethodRadio));
     navigate("/placeorder");
   };

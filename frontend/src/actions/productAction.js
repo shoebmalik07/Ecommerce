@@ -162,7 +162,7 @@ export const createProductReview =
         review,
         config
       );
-      dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS, payload:data });
+      dispatch({ type: PRODUCT_CREATE_REVIEW_SUCCESS, payload: data });
     } catch (err) {
       dispatch({
         type: PRODUCT_CREATE_REVIEW_FAIL,

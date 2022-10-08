@@ -25,7 +25,7 @@ const HomeScreen = () => {
       <Spacer h="5" />
 
       <HomeBannerOne />
-      
+
       <Spacer h="5" />
 
       <Heading as="h2" mb="8" fontSize="3xl">
